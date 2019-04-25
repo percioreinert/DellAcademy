@@ -1,5 +1,7 @@
 package com.dell.academy;
 
+import java.util.Arrays;
+
 @SuppressWarnings("unchecked")
 public class ListaArray<E> {
 
@@ -48,8 +50,9 @@ public class ListaArray<E> {
         checkIndex(index, size);
         E obj = (E) list[index];
         for (int i = index; i < size - 1; i++) {
-            list[index] = list[index + 1];
+            list[i] = list[i + 1];
         }
+        list[size - 1] = null;
         size--;
         return obj;
     }
@@ -57,6 +60,17 @@ public class ListaArray<E> {
     public E get(int index) {
         checkIndex(index, size);
         return (E) list[index];
+    }
+
+    public void show() {
+        for (int i = 0; i < size; i++) {
+            Pessoa a = (Pessoa) list[i];
+            System.out.println(a.toString());
+        }
+    }
+
+    public int size() {
+        return this.size;
     }
 
     // == private methods ==
