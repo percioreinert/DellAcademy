@@ -1,4 +1,4 @@
-package com.dell.academy;
+package com.dell.academy.exercicios;
 
 public class E1 {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.dell.academy;
+package com.dell.academy.lista;
 
 public class Pessoa {
 
@@ -10,8 +10,6 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" +
-                "nome='" + nome + '\'' +
-                '}';
+        return "Nome: " + this.nome;
     }
 }

@@ -1,6 +1,4 @@
-package com.dell.academy;
-
-import java.util.Arrays;
+package com.dell.academy.lista;
 
 @SuppressWarnings("unchecked")
 public class ListaArray<E> {

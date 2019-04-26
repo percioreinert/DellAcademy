@@ -1,4 +1,4 @@
-package com.dell.academy;
+package com.dell.academy.permutacao;
 
 public class AppPermutacoes {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.dell.academy;
+package com.dell.academy.contacorrente;
 
 public class ContaCorrente {
 

@@ -1,4 +1,4 @@
-package com.dell.academy;
+package com.dell.academy.inversao;
 
 public class Invert {
     public static void main(String[] args) {

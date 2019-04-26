@@ -1,4 +1,4 @@
-package com.dell.academy;
+package com.dell.academy.exercicios;
 
 public class E2 {
 	
