@@ -1,100 +1,100 @@
 package com.dell.academy;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 public class CadastroDeContas {
 
-    // == constants ==
-    private static final int DEFAULT_CAPACITY = 10;
-
     // == fields ==
-    private ContaCorrente[] list;
-    private int size;
+    private List<ContaCorrente> list;
 
     // == constructors ==
     public CadastroDeContas() {
-        this.list = new ContaCorrente[DEFAULT_CAPACITY];
-        size = 0;
+        list = new ArrayList<>();
     }
 
     public CadastroDeContas(int initialCapacity) {
-        this.list = new ContaCorrente[initialCapacity];
-        size = 0;
+        list = new ArrayList<>(initialCapacity);
     }
 
     // == public methods ==
+    public List<ContaCorrente> printList() {
+        return Collections.unmodifiableList(list);
+    }
+
+    public List<ContaCorrente> getList() {
+        return this.list;
+    }
+
+    public List<ContaCorrente> copyList() {
+        return new ArrayList<>(list);
+    }
+
     public boolean addConta(ContaCorrente c) {
         if (c != null) {
-            if (size == list.length) {
-                grow();
-            }
-            list[size] = c;
-            size++;
+            list.add(c);
             return true;
         }
         return false;
     }
 
-    public ContaCorrente getConta(int nroConta) {
-        for (int i = 0; i < size; i++) {
-            if (list[i].getNumeroDaConta() == nroConta) {
-                return list[i];
+    public ContaCorrente getConta(int accountNumber) {
+        ContaCorrente aux = null;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getAccountNumber() == accountNumber) {
+                aux = list.get(i);
+                if (i > 0) {
+                    list.set(i, list.get(i - 1));
+                    list.set(i - 1, aux);
+                }
+                break;
             }
         }
-        return null;
+        return aux;
     }
 
     public double getSaldoTotal() {
         double total = 0;
-        for (int i = 0; i < size; i++) {
-            total += list[i].getSaldo();
+        for (ContaCorrente c : list) {
+            total += c.getBalance();
         }
         return total;
     }
 
     public int conta(double noMinimo) {
         int count = 0;
-        for (int i = 0; i < size; i++) {
-            if (list[i].getSaldo() >= noMinimo) {
+        for (ContaCorrente c : list) {
+            if (c.getBalance() >= noMinimo) {
                 count++;
             }
         }
-        return count;
+         return count;
     }
 
     public int maiorSaldo() {
-        ContaCorrente maior = list[0];
-        for (int i = 1; i < size; i++) {
-            if (list[i].getSaldo() > maior.getSaldo()) {
-                maior = list[i];
+        ContaCorrente maior = list.get(0);
+        for (ContaCorrente c : list) {
+            if (c.getBalance() > maior.getBalance()) {
+                maior = c;
             }
         }
-        return maior.getNumeroDaConta();
+        return maior.getAccountNumber();
     }
 
     public boolean remove(int nroConta) {
-        for (int i = 0; i < size; i++) {
-            if (list[i].getNumeroDaConta() == nroConta) {
-                list[i] = list[i + 1];
+        Iterator<ContaCorrente> iterator = list.iterator();
+        ContaCorrente c;
+
+        while (iterator.hasNext()) {
+            c = iterator.next();
+
+            if (c.getAccountNumber() == nroConta) {
+                iterator.remove();
+                return true;
             }
         }
         return false;
-    }
-
-    // == private methods ==
-    private void grow() {
-        ContaCorrente[] nova = new ContaCorrente[list.length * 2];
-        for (int i = 0; i < size; i++) {
-            nova[i] = list[i];
-        }
-        list = nova;
-    }
-
-    private void fix() {
-
-    }
-
-    private void checkIndex(int index, int size) {
-        if (index < 0 || index > size) {
-            throw new RuntimeException("Índice inválido");
-        }
     }
 }

@@ -3,39 +3,54 @@ package com.dell.academy;
 public class ContaCorrente {
 
     // == fields ==
-    private double saldo;
-    private int numeroConta;
+    private double balance;
+    private int accountNumber;
 
     // == constructors ==
-    public ContaCorrente(int numeroConta) {
-        // TODO: Validar o número da conta.
-        this.numeroConta = numeroConta;
-        this.saldo = 0;
+    public ContaCorrente(int numeroConta) throws RuntimeException {
+        if (numeroConta < 100000 || numeroConta > 999999) {
+            throw new RuntimeException("Invalid account number.");
+        }
+        this.accountNumber = numeroConta;
+        this.balance = 0;
+    }
+
+    public ContaCorrente(int numeroConta, double valor) throws RuntimeException {
+        if (numeroConta < 100000 || numeroConta > 999999) {
+            throw new RuntimeException("Invalid account number.");
+        }
+        this.accountNumber = numeroConta;
+        this.balance = 0;
+        deposit(valor);
     }
 
     // == public methods ==
-    public void deposito(double valor) {
+    public void deposit(double valor) throws RuntimeException {
         if (valor > 0) {
-            this.saldo += valor;
+            this.balance += valor;
         } else {
-            throw new RuntimeException("Valor inválido");
+            throw new RuntimeException("Invalid value.");
         }
     }
 
-    public double retirada(double retirada) {
-        if (retirada > 0 && retirada <= saldo) {
-            saldo -= retirada;
-            return this.saldo;
+    public double cashOut(double saque) throws RuntimeException {
+        if (saque > 0 ) {
+            if (saque <= this.balance) {
+                this.balance -= saque;
+                return this.balance;
+            } else {
+                throw new RuntimeException("Saldo insuficiente.");
+            }
         } else {
-            throw new RuntimeException("Valor inválido");
+            throw new RuntimeException("Invalid value");
         }
     }
 
-    public double getSaldo() {
-        return this.saldo;
+    public double getBalance() {
+        return this.balance;
     }
 
-    public int getNumeroDaConta() {
-        return this.numeroConta;
+    public int getAccountNumber() {
+        return this.accountNumber;
     }
 }
