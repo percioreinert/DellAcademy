@@ -3,28 +3,21 @@ package com.dell.academy.rover;
 public class MarsRover {
 
     // == fields ==
-    private int x;
-    private int y;
-    private Movement movement;
-    // TODO: finish the implementation.
+    private Position position;
 
     // == constructors ==
-    public MarsRover(int x, int y) {
-        this.x = x;
-        this.y = y;
-        movement = Movement.M;
+    public MarsRover() {
+        this.position = new Position();
     }
 
     // == public methods ==
-    public int getX() {
-        return this.x;
+    public Position getPosition() {
+        return this.position;
     }
 
-    public int getY() {
-        return this.y;
-    }
-
-    public Movement getMovement() {
-        return this.movement;
+    public void setPosition(int x, int y, CardinalPoint c) {
+        position.setX(x);
+        position.setY(y);
+        position.setCardinalPoint(c);
     }
 }
